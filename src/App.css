@@ -67,3 +67,22 @@
   color: white;
   cursor: pointer;
 }
+
+.suggestions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.suggestions button {
+  padding: 8px 14px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.suggestions button:hover {
+  background-color: #e8f2ff;
+}
