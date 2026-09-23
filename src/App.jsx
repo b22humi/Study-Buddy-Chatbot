@@ -1,7 +1,9 @@
-import { useState } from 'react';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Login from "./Login";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
@@ -12,16 +14,34 @@ function App() {
     if (userMessage.trim() === "") return;
 
     let botReply = "";
-
-    if (userMessage.toLowerCase() === "hello") {
+    const lowerMessage=userMessage.toLowerCase();
+    if (lowerMessage.includes("hello") || lowerMessage.includes("hi")|| lowerMessage.includes("how are you")) {
       botReply = "Hi! 👋 How can I help you?";
     } 
-    else if (userMessage.toLowerCase() === "java") {
-      botReply = "Great! Let's learn Java together. ☕";
-    } 
-    else if (userMessage.toLowerCase() === "dsa") {
+    else if (lowerMessage.includes("java") ) {
+      botReply = "Great! ☕ Java is an object-oriented programming language. What would you like to learn about Java?";
+    }
+    
+    else if (lowerMessage.includes("dsa") ) {
       botReply = "Let's practice DSA! 💻";
     } 
+    else if (lowerMessage.includes("react")) {
+       botReply = "React is a JavaScript library used to build user interfaces and web applications. ⚛️";
+    }
+
+    else if (
+  lowerMessage.includes("git") ||
+  lowerMessage.includes("github")
+) {
+  botReply = "Git is a version control system, while GitHub is a platform where you can store and collaborate on Git repositories. 🚀";
+}
+
+else if (
+  lowerMessage.includes("ai") ||
+  lowerMessage.includes("machine learning")
+) {
+  botReply = "AI is the broader field of making machines perform tasks that normally require human intelligence. Machine Learning is a part of AI that learns patterns from data. 🤖";
+}
     else {
       botReply = "Sorry, I don't understand that yet.";
     }
@@ -49,6 +69,10 @@ function App() {
   const handleSuggestion = (question) => {
     sendMessage(question);
   };
+ 
+  if (!isLoggedIn) {
+  return <Login onLogin={() => setIsLoggedIn(true)} ></Login>;
+}
 
   return (
     <div className="chatbot">
